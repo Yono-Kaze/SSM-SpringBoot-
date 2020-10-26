@@ -17,6 +17,7 @@ public class PersonInfo {
 	private Date createTime;
 	private Date lastEditTime;
 	private Integer enableStatus;
+	private int userType;
 
 	public Long getUserId() {
 		return userId;
@@ -120,6 +121,14 @@ public class PersonInfo {
 
 	public void setEnableStatus(Integer enableStatus) {
 		this.enableStatus = enableStatus;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 }
