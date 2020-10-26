@@ -1,0 +1,26 @@
+package com.imooc.myo2o.service.impl;
+
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.imooc.myo2o.cache.JedisUtil;
+import com.imooc.myo2o.service.CacheService;
+
+@Service
+public class CacheServiecImpl implements CacheService {
+
+	@Autowired
+	private JedisUtil.Keys jedisKeys;
+	
+	@Override
+	public void removeFromCache(String keyPrefix) {
+		Set<String> keySet = jedisKeys.keys(keyPrefix + "*");
+		for(String key : keySet) {
+			jedisKeys.del(key);
+		}
+
+	}
+
+}
