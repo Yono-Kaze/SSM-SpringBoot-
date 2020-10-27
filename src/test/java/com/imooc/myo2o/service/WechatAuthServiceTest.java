@@ -18,6 +18,7 @@ import com.imooc.myo2o.enums.WechatAuthStateEnum;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WechatAuthServiceTest {
+	//13.6-13.11
 	
 	@Autowired
 	private WechatAuthService wechatAuthService;
