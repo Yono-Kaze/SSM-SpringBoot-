@@ -19,6 +19,7 @@ import com.imooc.myo2o.dto.ShopExecution;
 import com.imooc.myo2o.entity.Area;
 import com.imooc.myo2o.entity.Shop;
 import com.imooc.myo2o.entity.ShopCategory;
+import com.imooc.myo2o.exception.ShopOperationException;
 import com.imooc.myo2o.service.AreaService;
 import com.imooc.myo2o.service.ShopCategoryService;
 import com.imooc.myo2o.service.ShopService;
@@ -38,10 +39,11 @@ public class ShopListController {
 	 * 返回商品列表页里的shopcategory列表（二级或一级），一级区域信息列表
 	 * @param request
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/listshopspageinfo", method = RequestMethod.GET)
 	@ResponseBody
-	private Map<String, Object> listShopsPageInfo(HttpServletRequest request) {
+	private Map<String, Object> listShopsPageInfo(HttpServletRequest request) throws IOException {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		//从前端获取parentId
 		long parentId = HttpServletRequestUtil.getLong(request, "parentId");
@@ -63,8 +65,8 @@ public class ShopListController {
 			try {
 				//如果parentId不存在，则取出所有一级shopCategory
 				shopCategoryList = shopCategoryService
-						.getShopCategoryList(null);
-			} catch (Exception e) {
+						.getFirstLevelShopCategoryList();
+			} catch (ShopOperationException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.toString());
 			}

@@ -87,7 +87,7 @@ public class ShopServiceImpl implements ShopService{
 		} else {
 			try {
 				//判断是否需要处理图片
-				if (shopImg.getImage() != null && shopImg.getImageName() != null && !"".equals(shopImg.getImageName())) {
+				if (shopImg != null && shopImg.getImage() != null && shopImg.getImageName() != null && !"".equals(shopImg.getImageName())) {
 					Shop tempShop = shopDao.queryByShopId(shop.getShopId());
 					if (tempShop.getShopImg() != null) {
 						FileUtil.deleteFileOrPath(tempShop.getShopImg());
@@ -103,8 +103,8 @@ public class ShopServiceImpl implements ShopService{
 					shop = shopDao.queryByShopId(shop.getShopId());
 					return new ShopExecution(ShopStateEnum.SUCCESS, shop);
 				}
-			} catch (Exception e) {
-				throw new RuntimeException("modifyShop error: "
+			} catch (ShopOperationException e) {
+				throw new ShopOperationException("modifyShop error: "
 						+ e.getMessage());
 			}
 		}

@@ -5,7 +5,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class FileUtil {
+
+	private static String winPath;
+	private static String linuxPath;
+
+	@Value("${win.base.path}")
+	public  void setWinPath(String winPath) {
+		FileUtil.winPath = winPath;
+	}
+	@Value("${linux.base.path}")
+	public  void setLinuxPath(String linuxPath) {
+		FileUtil.linuxPath = linuxPath;
+	}
+
 	private static String seperator = System.getProperty("file.separator");
 	private static final SimpleDateFormat sDateFormat = new SimpleDateFormat(
 			"yyyyMMddHHmmss"); // 时间格式化的格式
@@ -15,9 +32,9 @@ public class FileUtil {
 		String os = System.getProperty("os.name");
 		String basePath = "";
 		if (os.toLowerCase().startsWith("win")) {
-			basePath = "G:/projectdev/image/";
+			basePath = winPath;
 		} else {
-			basePath = "/home/xiangzepro/";
+			basePath = linuxPath;
 		}
 		basePath = basePath.replace("/", seperator);
 		return basePath;
@@ -34,7 +51,7 @@ public class FileUtil {
 		shopCategoryImagePath = shopCategoryImagePath.replace("/", seperator);
 		return shopCategoryImagePath;
 	}
-	
+
 	public static String getPersonInfoImagePath() {
 		String personInfoImagePath = "/upload/images/item/personinfo/";
 		personInfoImagePath = personInfoImagePath.replace("/", seperator);
@@ -70,7 +87,7 @@ public class FileUtil {
 			file.delete();
 		}
 	}
-	
+
 	/**
 	 * storePath是文件路径，还是目录的路径
 	 * 前者，删除该文件

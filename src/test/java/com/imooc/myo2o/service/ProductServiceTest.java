@@ -5,45 +5,25 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileItemHeaders;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import com.imooc.myo2o.dto.ImageHolder;
 import com.imooc.myo2o.dto.ProductExecution;
-import com.imooc.myo2o.dto.ShopExecution;
-import com.imooc.myo2o.entity.Area;
-import com.imooc.myo2o.entity.PersonInfo;
 import com.imooc.myo2o.entity.Product;
 import com.imooc.myo2o.entity.ProductCategory;
 import com.imooc.myo2o.entity.Shop;
-import com.imooc.myo2o.entity.ShopCategory;
 import com.imooc.myo2o.enums.ProductStateEnum;
-import com.imooc.myo2o.enums.ShopStateEnum;
 import com.imooc.myo2o.exception.ShopOperationException;
-import com.imooc.myo2o.util.FileDeal;
-import com.mysql.cj.protocol.FullReadInputStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

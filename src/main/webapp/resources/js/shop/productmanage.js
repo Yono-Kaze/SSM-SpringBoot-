@@ -86,7 +86,7 @@ $(function() {
 					function(e) {
 						var target = $(e.currentTarget);
 						if (target.hasClass('edit')) {
-							window.location.href = '/myo2o/superadmin/productedit?productId='
+							window.location.href = '/myo2o/shop/productedit?productId='
 									+ e.currentTarget.dataset.id;
 						} else if (target.hasClass('delete')) {
 							deleteItem(e.currentTarget.dataset.id,
@@ -98,6 +98,6 @@ $(function() {
 					});
 
 	$('#new').click(function() {
-		window.location.href = '/myo2o/superadmin/productedit';
+		window.location.href = '/myo2o/shop/productedit';
 	});
 });

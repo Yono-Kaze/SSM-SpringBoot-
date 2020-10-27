@@ -8,7 +8,7 @@ $(function() {
             headLineList.map(function (item, index) {
                 swiperHtml += ''
                             + '<div class="swiper-slide img-wrap">'
-                            +      '<img class="banner-img" src="'+ item.lineImg +'" alt="'+ item.lineName +'">'
+                            +      '<img class="banner-img" src="'+ getContextPath() +item.lineImg +'" alt="'+ item.lineName +'">'
                             + '</div>';
             });
             $('.swiper-wrapper').html(swiperHtml);
@@ -26,7 +26,7 @@ $(function() {
                              +          '<p class="shop-desc">'+ item.shopCategoryDesc +'</p>'
                              +      '</div>'
                              +      '<div class="shop-classify-img-warp">'
-                             +          '<img class="shop-img" src="'+ item.shopCategoryImg +'">'
+                             +          '<img class="shop-img" src="'+ getContextPath() +item.shopCategoryImg +'">'
                              +      '</div>'
                              +  '</div>';
             });

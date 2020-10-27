@@ -1,6 +1,8 @@
 package com.imooc.myo2o.config.web;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -9,10 +11,16 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.google.code.kaptcha.servlet.KaptchaServlet;
+import com.imooc.myo2o.interceptor.shop.ShopLoginInterceptor;
+import com.imooc.myo2o.interceptor.shop.ShopPermissionInterceptor;
 
 /**
  *<p>Description:对标spring-mvc，开启Mvc自动注入spring容器
@@ -29,27 +37,28 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 
 	//spring容器
 	private ApplicationContext applicationContext;
-	
+
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}
-	
+
 	/**
 	 * 静态资源配置
 	 * @param registry
 	 */
-	public void addResourcehandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:G:\\projectdev\\image\\upload\\");
 	}
-	
+
 	/**
 	 * 定义默认的请求处理器
 	 */
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
-	
+
 	/**
 	 * 定义视图解析器
 	 * @return
@@ -82,5 +91,75 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		multipartResolver.setMaxInMemorySize(20971520);
 		return multipartResolver;
 	}
-	
+
+	@Value("${kaptcha.border}")
+	private	String border;
+	@Value("${kaptcha.textproducer.font.color}")
+	private	String fcolor;
+	@Value("${kaptcha.image.width}")
+	private	String	width;
+	@Value("${kaptcha.textproducer.char.string}")
+	private	String cstring;
+	@Value("${kaptcha.image.height}")
+	private	String	height;
+	@Value("${kaptcha.textproducer.font.size}")
+	private	String	fsize;
+	@Value("${kaptcha.noise.color}")
+	private	String	ncolor;
+	@Value("${kaptcha.textproducer.char.length}")
+	private	String	clength;
+	@Value("${kaptcha.textproducer.font.names}")
+	private	String	fnames;
+
+	/**
+	 * 配置Kaptcha验证码
+	 * @return
+	 */
+	@Bean(name = "Kaptcha")
+	public ServletRegistrationBean<KaptchaServlet> servletRegistrationBean () {
+		//拦截的url
+		ServletRegistrationBean<KaptchaServlet> servlet = new ServletRegistrationBean<KaptchaServlet>(new KaptchaServlet(), "/Kaptcha");
+		servlet.addInitParameter("kaptcha.border", border);//	<!-- 是否有边框 -->
+		servlet.addInitParameter("kaptcha.textproducer.font.color", fcolor);//	<!-- 字体颜色 -->
+		servlet.addInitParameter("kaptcha.image.width", width);//	<!-- 图片宽度 -->
+		servlet.addInitParameter("kaptcha.textproducer.char.string", cstring);//	<!-- 使用哪些字符生成验证码 -->
+		servlet.addInitParameter("kaptcha.image.height", height);//	<!-- 图片高度 -->
+		servlet.addInitParameter("kaptcha.textproducer.font.size", fsize);//	<!-- 字体大小 -->
+		servlet.addInitParameter("kaptcha.noise.color", ncolor);//	<!-- 干扰线的颜色 -->
+		servlet.addInitParameter("kaptcha.textproducer.char.length", clength);//	<!-- 字符个数 -->
+		servlet.addInitParameter("kaptcha.textproducer.font.names", fnames);//	<!-- 使用哪些字体 -->
+		return servlet;
+	}
+
+	/**
+	 * 添加权限拦截器配置
+	 */
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		String interceptPath = "/shop/**";
+//		//注册登录的拦截器
+//		InterceptorRegistration loginIR = registry.addInterceptor(new ShopLoginInterceptor());
+//		//配置拦截的路径
+//		loginIR.addPathPatterns(interceptPath);
+//		//配置不拦截的路径
+//		loginIR.excludePathPatterns("/shop/ownerlogin");
+//		loginIR.excludePathPatterns("/shop/register");
+//		
+//		//对该店铺有操作权限的拦截器
+//		InterceptorRegistration permissionIR = registry.addInterceptor(new ShopPermissionInterceptor());
+//		//配置拦截的路径
+//		loginIR.addPathPatterns(interceptPath);
+//		//配置不拦截的路径
+//		permissionIR.excludePathPatterns("/shop/ownerlogin");
+//		permissionIR.excludePathPatterns("/shop/ownerlogincheck");
+//		permissionIR.excludePathPatterns("/shop/register");
+//		//<!-- shoplist page -->
+//		permissionIR.excludePathPatterns("/shop/shoplist");
+//		permissionIR.excludePathPatterns("/shop/logout");
+//		permissionIR.excludePathPatterns("/shop/list");
+//		//<!-- shopedit page -->
+//		permissionIR.excludePathPatterns("/shop/shopedit");
+//		permissionIR.excludePathPatterns("/shop/getshopinitinfo" );
+//		permissionIR.excludePathPatterns("/shop/registershop");
+//		
+//	}
 }

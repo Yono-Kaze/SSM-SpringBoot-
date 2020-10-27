@@ -33,3 +33,8 @@ function getQueryString(name) {
 function changeVerifyCode(img) {
 	img.src = "../Kaptcha?" + Math.floor(Math.random() * 100);
 }
+
+
+function getContextPath() {
+	return "/myo2o";
+}

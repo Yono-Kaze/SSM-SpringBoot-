@@ -8,8 +8,10 @@ $(function(){
 			if(data.shopId != undefined && data.shopId != null){
 				shopId =data.shopId;
 			}
-			$('#shopInfo')
+			$('#shopedit')
 			.attr('href','/myo2o/shop/shopedit?shopId=' + shopId);
+			$('#productcategorymanage')
+			.attr('href','/myo2o/shop/productcategorymanage?shopId=' + shopId);
 		}
 	});
 });

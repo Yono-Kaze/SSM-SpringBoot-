@@ -38,7 +38,7 @@ public class MainPageController {
 		try {
 			//获取一级店铺类别列表
 			shopCategoryList = shopCategoryService
-					.getShopCategoryList(null);
+					.getFirstLevelShopCategoryList();
 			modelMap.put("shopCategoryList", shopCategoryList);
 		} catch (Exception e) {
 			e.printStackTrace();

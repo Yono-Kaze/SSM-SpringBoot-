@@ -29,9 +29,38 @@ public class ShopCategoryServiceImpl  implements ShopCategoryService{
 	private JedisUtil.Keys jedisKeys;
 	@Autowired
 	private ShopCategoryDao shopCategoryDao;
-	
+
 	private static Logger logger = LoggerFactory.getLogger(ShopCategoryServiceImpl.class);
-	
+
+	/**
+	 * 获取一级商铺目录
+	 * @return
+	 * @throws IOException
+	 */
+	@Override
+	public List<ShopCategory> getFirstLevelShopCategoryList()
+			throws IOException {
+		String key = SCLISTKEY;
+		List<ShopCategory> shopCategoryList = null;
+		ObjectMapper mapper = new ObjectMapper();
+		if (!jedisKeys.exists(key)) {
+			//			ShopCategory shopCategoryCondition = new ShopCategory();		
+			//			shopCategoryCondition.setShopCategoryId(-1L);
+			// 当shopCategoryCondition为的时候，查询的条件会变为 where parent_id is null
+			shopCategoryList = shopCategoryDao
+					.queryShopCategory(null);
+			String jsonString = mapper.writeValueAsString(shopCategoryList);
+			jedisStrings.set(key, jsonString);
+		} else {
+			String jsonString = jedisStrings.get(key);
+			JavaType javaType = mapper.getTypeFactory()
+					.constructParametricType(ArrayList.class,
+							ShopCategory.class);
+			shopCategoryList = mapper.readValue(jsonString, javaType);
+		}
+		return shopCategoryList;
+	}
+
 	/**
 	 *根据查询条件获取shopCategoryCondition
 	 */
