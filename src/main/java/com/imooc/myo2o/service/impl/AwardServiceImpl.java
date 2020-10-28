@@ -50,7 +50,7 @@ public class AwardServiceImpl implements AwardService {
 			award.setLastEditTime(new Date());
 			award.setEnableStatus(1);
 			if (thumbnail != null) {
-				addThumbnail(award, thumbnail);
+				//addThumbnail(award, thumbnail);
 			}
 			try {
 				int effectedNum = awardDao.insertAward(award);
@@ -78,7 +78,7 @@ public class AwardServiceImpl implements AwardService {
 				if (tempAward.getAwardImg() != null) {
 					FileUtil.deleteFile(tempAward.getAwardImg());
 				}
-				addThumbnail(award, thumbnail);
+			//	addThumbnail(award, thumbnail);
 			}
 			try {
 				int effectedNum = awardDao.updateAward(award);
