@@ -17,7 +17,7 @@ public class UserAwardMap {
 	private PersonInfo user;
 	private Award award;
 	private Shop shop;
-	private PersonInfo operator;
+	private PersonInfo operator;//操作员实体类
 
 	public Long getUserAwardId() {
 		return userAwardId;
