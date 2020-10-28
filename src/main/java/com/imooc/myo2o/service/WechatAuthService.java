@@ -2,7 +2,7 @@ package com.imooc.myo2o.service;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.imooc.myo2o.dto.ImageHolder;
+
 import com.imooc.myo2o.dto.WechatAuthExecution;
 import com.imooc.myo2o.entity.WechatAuth;
 
@@ -23,6 +23,6 @@ public interface WechatAuthService {
 	 * @throws RuntimeException
 	 */
 	WechatAuthExecution register(WechatAuth wechatAuth,
-			ImageHolder profileImg) throws RuntimeException;
+			CommonsMultipartFile  profileImg) throws RuntimeException;
 
 }

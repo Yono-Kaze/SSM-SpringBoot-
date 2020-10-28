@@ -2,12 +2,12 @@ package com.imooc.myo2o.dto;
 
 import java.io.InputStream;
 
-public class ImageHolder {
+public class ImageHolderDED {
 	
 	private String imageName;
 	private InputStream image;
 	
-	public ImageHolder(String imageName, InputStream image) {
+	public ImageHolderDED(String imageName, InputStream image) {
 		super();
 		this.imageName = imageName;
 		this.image = image;

@@ -10,7 +10,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.imooc.myo2o.dao.AwardDao;
 import com.imooc.myo2o.dto.AwardExecution;
-import com.imooc.myo2o.dto.ImageHolder;
 import com.imooc.myo2o.entity.Award;
 import com.imooc.myo2o.enums.AwardStateEnum;
 import com.imooc.myo2o.service.AwardService;
@@ -50,7 +49,7 @@ public class AwardServiceImpl implements AwardService {
 			award.setLastEditTime(new Date());
 			award.setEnableStatus(1);
 			if (thumbnail != null) {
-				//addThumbnail(award, thumbnail);
+				addThumbnail(award, thumbnail);
 			}
 			try {
 				int effectedNum = awardDao.insertAward(award);
@@ -78,7 +77,7 @@ public class AwardServiceImpl implements AwardService {
 				if (tempAward.getAwardImg() != null) {
 					FileUtil.deleteFile(tempAward.getAwardImg());
 				}
-			//	addThumbnail(award, thumbnail);
+				addThumbnail(award, thumbnail);
 			}
 			try {
 				int effectedNum = awardDao.updateAward(award);
@@ -94,7 +93,7 @@ public class AwardServiceImpl implements AwardService {
 		}
 	}
 
-	private void addThumbnail(Award award, ImageHolder thumbnail) {
+	private void addThumbnail(Award award, CommonsMultipartFile thumbnail) {
 		String dest = FileUtil.getShopImagePath(award.getShopId());
 		String thumbnailAddr = ImageUtil.generateThumbnail(thumbnail, dest);
 		award.setAwardImg(thumbnailAddr);

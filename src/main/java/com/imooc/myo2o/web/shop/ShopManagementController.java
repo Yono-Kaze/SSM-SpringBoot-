@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.myo2o.dto.ImageHolder;
 import com.imooc.myo2o.dto.ShopExecution;
 import com.imooc.myo2o.entity.Area;
 import com.imooc.myo2o.entity.PersonInfo;
@@ -142,6 +141,11 @@ public class ShopManagementController {
 	}
 
 
+	/**
+	 * 注册店铺
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/registershop", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> registerShop(HttpServletRequest request) {
@@ -181,21 +185,16 @@ public class ShopManagementController {
 			//Session TODO
 			owner.setUserId(8L);
 			shop.setOwner(owner);
-			ShopExecution se;
+			
 			try {
-				ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
-				se = shopService.addShop(shop, imageHolder);
+				ShopExecution se = shopService.addShop(shop, shopImg);
 				if (se.getState() == ShopStateEnum.CHECK.getState()) {
 					modelMap.put("success", true);
 				}else {
 					modelMap.put("success", false);
 					modelMap.put("errMsg", se.getStateInfo());
 				}
-			} catch (IOException e) {
-				modelMap.put("success", false);
-				modelMap.put("errMsg", e.getMessage());
-				return modelMap;
-			}catch (ShopOperationException e) {
+			} catch (ShopOperationException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.getMessage());
 				return modelMap;
@@ -208,6 +207,11 @@ public class ShopManagementController {
 		}
 	}
 
+	/**
+	 * 更新店铺信息
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/modifyshop", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> modifyShop(HttpServletRequest request) {
@@ -242,13 +246,7 @@ public class ShopManagementController {
 			shop.setOwner(owner);
 			ShopExecution se;
 			try {
-				if(shopImg == null)
-				{
-					se = shopService.modifyShop(shop, null);
-				}else {
-					ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
-					se = shopService.modifyShop(shop, imageHolder);
-				}
+					se = shopService.modifyShop(shop, shopImg);
 				if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
 					//该用户可以操作的店铺列表
@@ -263,10 +261,6 @@ public class ShopManagementController {
 					modelMap.put("success", false);
 					modelMap.put("errMsg", se.getStateInfo());
 				}
-			} catch (IOException e) {
-				modelMap.put("success", false);
-				modelMap.put("errMsg", e.getMessage());
-				return modelMap;
 			} catch (ShopOperationException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.getMessage());

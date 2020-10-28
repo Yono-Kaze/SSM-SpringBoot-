@@ -8,10 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.imooc.myo2o.dao.ShopDao;
-import com.imooc.myo2o.dto.ImageHolder;
 import com.imooc.myo2o.dto.ShopExecution;
 import com.imooc.myo2o.entity.Shop;
 import com.imooc.myo2o.enums.ShopStateEnum;
@@ -36,7 +35,7 @@ public class ShopServiceImpl implements ShopService{
 	 */
 	@Transactional
 	@Override
-	public ShopExecution addShop(Shop shop, ImageHolder shopImgFile) {
+	public ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg) {
 		//空值判断
 		if (shop == null) {
 			return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
@@ -52,9 +51,9 @@ public class ShopServiceImpl implements ShopService{
 				throw new ShopOperationException("店铺创建失败");
 			} else {
 				try {
-					if (shopImgFile.getImage() != null) {
+					if (shopImg != null) {
 						//存储图片
-						addShopImg(shop, shopImgFile);
+						addShopImg(shop, shopImg);
 					}
 				} catch (Exception e) {
 					throw new ShopOperationException("addShopImg error: "
@@ -72,22 +71,22 @@ public class ShopServiceImpl implements ShopService{
 		return new ShopExecution(ShopStateEnum.CHECK,shop);
 	}
 
-	private void addShopImg(Shop shop, ImageHolder shopImgInputStream) {
+	private void addShopImg(Shop shop, CommonsMultipartFile shopImgCommonsMultipartFile) {
 		//获取shop图片目录的相对值路径
 		String dest = FileUtil.getShopImagePath(shop.getShopId());
-		String shopImgAddr = ImageUtil.generateThumbnail(shopImgInputStream, dest);
+		String shopImgAddr = ImageUtil.generateThumbnail(shopImgCommonsMultipartFile, dest);
 		shop.setShopImg(shopImgAddr);
 	}
 
 	@Override
-	public ShopExecution modifyShop(Shop shop, ImageHolder shopImg)
+	public ShopExecution modifyShop(Shop shop, CommonsMultipartFile shopImg)
 			throws ShopOperationException {
 		if (shop == null || shop.getShopId() == null) {
 			return new ShopExecution(ShopStateEnum.NULL_SHOPID);
 		} else {
 			try {
 				//判断是否需要处理图片
-				if (shopImg != null && shopImg.getImage() != null && shopImg.getImageName() != null && !"".equals(shopImg.getImageName())) {
+				if (shopImg != null) {
 					Shop tempShop = shopDao.queryByShopId(shop.getShopId());
 					if (tempShop.getShopImg() != null) {
 						FileUtil.deleteFileOrPath(tempShop.getShopImg());

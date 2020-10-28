@@ -2,30 +2,30 @@ package com.imooc.myo2o.util;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import net.coobird.thumbnailator.Thumbnails;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-
-import com.imooc.myo2o.dto.ImageHolder;
 
 public class ImageUtil {
 	
 	static final Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 	
-	public static String generateThumbnail(ImageHolder thumbnail, String targetAddr) {
+	public static String generateThumbnail(CommonsMultipartFile   thumbnail, String targetAddr) {
 		String realFileName = FileUtil.getRandomFileName();
-		String extension = getFileExtension(thumbnail.getImageName());
+		String extension = getFileExtension(thumbnail);
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		logger.debug("current relativeAddr is :"  + relativeAddr);
 		File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
 		logger.debug("current complete addr is :"  + FileUtil.getImgBasePath() +relativeAddr);
 		try {
-			Thumbnails.of(thumbnail.getImage()).size(200, 200).outputQuality(0.25f).toFile(dest);
+			Thumbnails.of(thumbnail.getInputStream()).size(200, 200).outputQuality(0.25f).toFile(dest);
 		} catch (IOException e) {
 			throw new RuntimeException("创建缩略图失败：" + e.toString());
 		}
@@ -38,17 +38,17 @@ public class ImageUtil {
 	 * @param targetAddr
 	 * @return
 	 */
-	public static String generateNormalImg(ImageHolder thumbnail, String targetAddr) {
+	public static String generateNormalImg(CommonsMultipartFile  thumbnail, String targetAddr) {
 		String realFileName = FileUtil.getRandomFileName();
 		//获取文件的扩展名，如png，jpg
-		String extension = getFileExtension(thumbnail.getImageName());
+		String extension = getFileExtension(thumbnail);
 		//如目标路径不存在，则自动创建
 		makeDirPath(targetAddr);
 		//获取文件存储的相对路径（带文件名）
 		String relativeAddr = targetAddr + realFileName + extension;
 		File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
 		try {
-			Thumbnails.of(thumbnail.getImage()).size(337, 640).outputQuality(0.5f).toFile(dest);
+			Thumbnails.of(thumbnail.getInputStream()).size(337, 640).outputQuality(0.5f).toFile(dest);
 		} catch (IOException e) {
 			throw new RuntimeException("创建缩略图失败：" + e.toString());
 		}
@@ -56,27 +56,27 @@ public class ImageUtil {
 		return relativeAddr;
 	}
 
-//	public static List<String> generateNormalImgs(List<CommonsMultipartFile> imgs, String targetAddr) {
-//		int count = 0;
-//		List<String> relativeAddrList = new ArrayList<String>();
-//		if (imgs != null && imgs.size() > 0) {
-//			makeDirPath(targetAddr);
-//			for (CommonsMultipartFile img : imgs) {
-//				String realFileName = FileUtil.getRandomFileName();
-//				String extension = getFileExtension(img);
-//				String relativeAddr = targetAddr + realFileName + count + extension;
-//				File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
-//				count++;
-//				try {
-//					Thumbnails.of(img.getInputStream()).size(600, 300).outputQuality(0.5f).toFile(dest);
-//				} catch (IOException e) {
-//					throw new RuntimeException("创建图片失败：" + e.toString());
-//				}
-//				relativeAddrList.add(relativeAddr);
-//			}
-//		}
-//		return relativeAddrList;
-//	}
+	public static List<String> generateNormalImgs(List<CommonsMultipartFile> imgs, String targetAddr) {
+		int count = 0;
+		List<String> relativeAddrList = new ArrayList<String>();
+		if (imgs != null && imgs.size() > 0) {
+			makeDirPath(targetAddr);
+			for (CommonsMultipartFile img : imgs) {
+				String realFileName = FileUtil.getRandomFileName();
+				String extension = getFileExtension(img);
+				String relativeAddr = targetAddr + realFileName + count + extension;
+				File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
+				count++;
+				try {
+					Thumbnails.of(img.getInputStream()).size(600, 300).outputQuality(0.5f).toFile(dest);
+				} catch (IOException e) {
+					throw new RuntimeException("创建图片失败：" + e.toString());
+				}
+				relativeAddrList.add(relativeAddr);
+			}
+		}
+		return relativeAddrList;
+	}
 
 	private static void makeDirPath(String targetAddr) {
 		String realFileParentPath = FileUtil.getImgBasePath() + targetAddr;
@@ -91,7 +91,8 @@ public class ImageUtil {
 	 * @param cFile
 	 * @return
 	 */
-	private static String getFileExtension(String fileName) {
-		return fileName.substring(fileName.lastIndexOf("."));
+	private static String getFileExtension(CommonsMultipartFile  fileName) {
+		String originalFileName = fileName.getOriginalFilename();
+		return originalFileName.substring(originalFileName.lastIndexOf("."));
 	}
 }

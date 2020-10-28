@@ -11,7 +11,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.imooc.myo2o.dao.PersonInfoDao;
 import com.imooc.myo2o.dao.WechatAuthDao;
-import com.imooc.myo2o.dto.ImageHolder;
 import com.imooc.myo2o.dto.WechatAuthExecution;
 import com.imooc.myo2o.entity.PersonInfo;
 import com.imooc.myo2o.entity.WechatAuth;
@@ -37,7 +36,7 @@ public class WechatAuthServiceImpl implements WechatAuthService {
 	@Override
 	@Transactional
 	public WechatAuthExecution register(WechatAuth wechatAuth,
-			ImageHolder profileImg) throws RuntimeException {
+			CommonsMultipartFile  profileImg) throws RuntimeException {
 		if (wechatAuth == null || wechatAuth.getOpenId() == null) {
 			return new WechatAuthExecution(WechatAuthStateEnum.NULL_AUTH_INFO);
 		}
@@ -89,7 +88,7 @@ public class WechatAuthServiceImpl implements WechatAuthService {
 	}
 
 	private void addProfileImg(WechatAuth wechatAuth,
-			ImageHolder profileImg) {
+			CommonsMultipartFile  profileImg) {
 		String dest = FileUtil.getPersonInfoImagePath();
 		String profileImgAddr = ImageUtil.generateThumbnail(profileImg, dest);
 		wechatAuth.getPersonInfo().setProfileImg(profileImgAddr);

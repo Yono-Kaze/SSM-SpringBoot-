@@ -12,7 +12,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.imooc.myo2o.dao.ProductDao;
 import com.imooc.myo2o.dao.ProductImgDao;
-import com.imooc.myo2o.dto.ImageHolder;
+
 import com.imooc.myo2o.dto.ProductExecution;
 import com.imooc.myo2o.entity.Product;
 import com.imooc.myo2o.entity.ProductImg;
@@ -54,8 +54,8 @@ public class ProductServiceImpl implements ProductService {
 	//2.往tb_product写入商品信息，获取productId
 	//3.结合productId批量处理商品详情图
 	//4.将商品详情图列表批量插入tb_product_img中
-	public ProductExecution addProduct(Product product, ImageHolder thumbnail, 
-			List<ImageHolder> productImgs) throws ProductOperationExecution {
+	public ProductExecution addProduct(Product product, CommonsMultipartFile thumbnail, 
+			List<CommonsMultipartFile> productImgs) throws ProductOperationExecution {
 		//空值判断
 		if (product != null && product.getShop() != null && product.getShop().getShopId() != null) {
 			//给商品设置上默认属性
@@ -93,8 +93,8 @@ public class ProductServiceImpl implements ProductService {
 	//2.若商品详情图列有参数值，对详情图片进行同样操作
 	//3.将tb_product_img下面的商品详情图记录全部清除
 	//4.更新tb_product信息
-	public ProductExecution modifyProduct(Product product, ImageHolder thumbnail,
-			List<ImageHolder> productImgsHolderList) throws ProductOperationExecution {
+	public ProductExecution modifyProduct(Product product, CommonsMultipartFile thumbnail,
+			List<CommonsMultipartFile> productImgsHolderList) throws ProductOperationExecution {
 		//空值判断
 		if (product != null && product.getShop() != null && product.getShop().getShopId() != null) {
 			//给商品设置默认属性
@@ -128,12 +128,12 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
-	private void addProductImgs(Product product, List<ImageHolder> productImgHolderList) {
+	private void addProductImgs(Product product, List<CommonsMultipartFile> productImgHolderList) {
 		//获取图片的存储路径，这里直接存放到相应的店铺文件夹下
 		String dest = FileUtil.getShopImagePath(product.getShop().getShopId());
 		List<ProductImg> productImgList = new ArrayList<ProductImg>();
 		//遍历图片一次去处理，并添加进productImg实体类里
-		for(ImageHolder productImgHolder: productImgHolderList) {
+		for(CommonsMultipartFile productImgHolder: productImgHolderList) {
 			String imgAddr = ImageUtil.generateNormalImg(productImgHolder, dest);
 			ProductImg productImg = new ProductImg();
 			productImg.setImgAddr(imgAddr);
@@ -165,7 +165,7 @@ public class ProductServiceImpl implements ProductService {
 		productImgDao.deleteProductImgByProductId(productId);
 	}
 
-	private void addThumbnail(Product product, ImageHolder thumbnail) {
+	private void addThumbnail(Product product, CommonsMultipartFile thumbnail) {
 		String dest = FileUtil.getShopImagePath(product.getShop().getShopId());
 		String thumbnailAddr = ImageUtil.generateThumbnail(thumbnail, dest);
 		product.setImgAddr(thumbnailAddr);

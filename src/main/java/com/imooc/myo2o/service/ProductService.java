@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.imooc.myo2o.dto.ImageHolder;
 import com.imooc.myo2o.dto.ProductExecution;
 import com.imooc.myo2o.entity.Product;
 import com.imooc.myo2o.exception.ProductOperationExecution;
@@ -35,8 +34,8 @@ public interface ProductService {
 	 * @return
 	 * @throws ProductOperationExecution
 	 */
-	ProductExecution addProduct(Product product, ImageHolder thumbnail, 
-			List<ImageHolder> productImgs)
+	ProductExecution addProduct(Product product, CommonsMultipartFile thumbnail, 
+			List<CommonsMultipartFile> productImgs)
 			throws ProductOperationExecution;
 
 	/**
@@ -47,6 +46,6 @@ public interface ProductService {
 	 * @return
 	 * @throws ProductOperationExecution
 	 */
-	ProductExecution modifyProduct(Product product, ImageHolder thumbnail,
-			List<ImageHolder> productImgsHolderList) throws ProductOperationExecution;
+	ProductExecution modifyProduct(Product product, CommonsMultipartFile thumbnail,
+			List<CommonsMultipartFile> productImgsHolderList) throws ProductOperationExecution;
 }
