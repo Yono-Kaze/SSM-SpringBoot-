@@ -90,7 +90,7 @@ function changeFilterStatus(status) {
 
 function imgFormater(value, row, index) {
 	var lineImg = row.lineImg;
-	return '<img src="' + lineImg + '" width="100px" height="60px">';
+	return '<img src="' + getContextPath() + lineImg + '" width="100px" height="60px">';
 }
 /**
  * 设置操作列的信息 参数说明 value 这个可以不管，但是要使用后面 row 和index 这个参数是必须的 row 当前行的数据 index

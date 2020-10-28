@@ -97,7 +97,7 @@ function ajaxTable() {
 }
 function imgFormater(value, row, index) {
 	var shopCategoryImg = row.shopCategoryImg;
-	return '<img src="' + shopCategoryImg + '" width="100px" height="60px">';
+	return '<img src="' + getContextPath() + shopCategoryImg + '" width="100px" height="60px">';
 }
 /**
  * 设置操作列的信息 参数说明 value 这个可以不管，但是要使用后面 row 和index 这个参数是必须的 row 当前行的数据 index

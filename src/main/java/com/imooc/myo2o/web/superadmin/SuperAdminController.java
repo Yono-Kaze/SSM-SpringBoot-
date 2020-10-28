@@ -8,35 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/superadmin", method = { RequestMethod.GET,
 		RequestMethod.POST })
 public class SuperAdminController {
-//	@RequestMapping(value = "/shopedit", method = RequestMethod.GET)
-//	private String register() {
-//		return "shop/shopedit";
-//	}
-//	
-//	@RequestMapping(value = "/shoplist", method = RequestMethod.GET)
-//	private String shopelList() {
-//		return "shop/shoplist";
-//	}
-//	
-//	@RequestMapping(value = "/shopmanage", method = RequestMethod.GET)
-//	private String shopManage() {
-//		return "shop/shopmanage";
-//	}
-//	
-//	@RequestMapping(value = "/productcategorymanage", method = RequestMethod.GET)
-//	private String productCategoryManage() {
-//		return "shop/productcategorymanage";
-//	}
-//	
-//	@RequestMapping(value = "/productmanage", method = RequestMethod.GET)
-//	private String productManage() {
-//		return "shop/productmanage";
-//	}
-//	
-//	@RequestMapping(value = "/productedit", method = RequestMethod.GET)
-//	private String productEdit() {
-//		return "shop/productedit";
-//	}
+	
+	@RequestMapping(value = "/bbb", method = RequestMethod.GET)
+	private String register() {
+		return "shop/bbb";
+	}
 
 	@RequestMapping(value = "/areamanage", method = RequestMethod.GET)
 	private String areaManagement() {

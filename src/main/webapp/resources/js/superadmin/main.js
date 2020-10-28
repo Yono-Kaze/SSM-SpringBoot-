@@ -5,7 +5,7 @@
 			handler: function(){
 				$.messager.confirm('注销提示', '你确定注销吗?', function(r){
 					if(r){
-						window.location = root+'/login/doLogout.jhtml';
+						window.location.href = '/myo2o/superadmin/login';
 					}
 				});
 			}
