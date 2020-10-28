@@ -27,7 +27,7 @@ import com.imooc.myo2o.util.HttpServletRequestUtil;
 import com.imooc.myo2o.util.MD5;
 
 @Controller
-@RequestMapping(value = "/shop", method = { RequestMethod.GET,
+@RequestMapping(value = "shop", method = { RequestMethod.GET,
 		RequestMethod.POST })
 public class OwnerAuthController {
 	@Autowired
@@ -149,7 +149,7 @@ public class OwnerAuthController {
 				.getAttribute("user");
 		if (userName != null && password != null && user != null
 				&& user.getUserId() != null) {
-			//password = MD5.getMd5(password);
+			password = MD5.getMd5(password);
 			LocalAuth localAuth = new LocalAuth();
 			localAuth.setUserName(userName);
 			localAuth.setPassword(password);

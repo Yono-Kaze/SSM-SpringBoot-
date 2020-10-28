@@ -57,7 +57,7 @@ $(function () {
 			cache : false,
 			success : function(data) {
 				if (data.success) {
-					window.location.href = '/myo2o/shop/ownerlogin';
+					console.log(退出成功);
 				}
 			},
 			error : function(data, error) {

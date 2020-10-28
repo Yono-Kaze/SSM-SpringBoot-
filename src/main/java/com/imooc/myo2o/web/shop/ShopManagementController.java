@@ -181,11 +181,6 @@ public class ShopManagementController {
 		}
 		//注册店铺
 		if (shop != null && shopImg != null) {
-			PersonInfo owner = new PersonInfo();
-			//Session TODO
-			owner.setUserId(8L);
-			shop.setOwner(owner);
-			
 			try {
 				ShopExecution se = shopService.addShop(shop, shopImg);
 				if (se.getState() == ShopStateEnum.CHECK.getState()) {

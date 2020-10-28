@@ -2,12 +2,20 @@ package com.imooc.myo2o.dto;
 
 import java.io.InputStream;
 
-public class ImageHolderDED {
+
+/**
+ * 
+ *<p>Description:自定义封装的图片类<p>	
+ * @author Administrator
+ * @version 2020-10-28
+ *
+ */
+public class ImageHolder {
 	
 	private String imageName;
 	private InputStream image;
 	
-	public ImageHolderDED(String imageName, InputStream image) {
+	public ImageHolder(String imageName, InputStream image) {
 		super();
 		this.imageName = imageName;
 		this.image = image;
