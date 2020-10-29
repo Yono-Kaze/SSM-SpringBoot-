@@ -41,52 +41,51 @@ public class LocalAuthServiceImpl implements LocalAuthService {
 	@Transactional
 	public LocalAuthExecution register(LocalAuth localAuth,
 			CommonsMultipartFile profileImg) throws RuntimeException {
-		return null;
-//		if (localAuth == null || localAuth.getPassword() == null
-//				|| localAuth.getUserName() == null) {
-//			return new LocalAuthExecution(LocalAuthStateEnum.NULL_AUTH_INFO);
-//		}
-//		try {
-//			localAuth.setCreateTime(new Date());
-//			localAuth.setLastEditTime(new Date());
-//			localAuth.setPassword(MD5.getMd5(localAuth.getPassword()));
-//			if (localAuth.getPersonInfo() != null
-//					&& localAuth.getPersonInfo().getUserId() == null) {
-//				if (profileImg != null) {
-//					localAuth.getPersonInfo().setCreateTime(new Date());
-//					localAuth.getPersonInfo().setLastEditTime(new Date());
-//					localAuth.getPersonInfo().setEnableStatus(1);
-//					try {
-//						addProfileImg(localAuth, profileImg);
-//					} catch (Exception e) {
-//						throw new RuntimeException("addUserProfileImg error: "
-//								+ e.getMessage());
-//					}
-//				}
-//				try {
-//					PersonInfo personInfo = localAuth.getPersonInfo();
-//					int effectedNum = personInfoDao
-//							.insertPersonInfo(personInfo);
-//					localAuth.setUserId(personInfo.getUserId());
-//					if (effectedNum <= 0) {
-//						throw new RuntimeException("添加用户信息失败");
-//					}
-//				} catch (Exception e) {
-//					throw new RuntimeException("insertPersonInfo error: "
-//							+ e.getMessage());
-//				}
-//			}
-//			int effectedNum = localAuthDao.insertLocalAuth(localAuth);
-//			if (effectedNum <= 0) {
-//				throw new RuntimeException("帐号创建失败");
-//			} else {
-//				return new LocalAuthExecution(LocalAuthStateEnum.SUCCESS,
-//						localAuth);
-//			}
-//		} catch (Exception e) {
-//			throw new RuntimeException("insertLocalAuth error: "
-//					+ e.getMessage());
-//		}
+		if (localAuth == null || localAuth.getPassword() == null
+				|| localAuth.getUserName() == null) {
+			return new LocalAuthExecution(LocalAuthStateEnum.NULL_AUTH_INFO);
+		}
+		try {
+			localAuth.setCreateTime(new Date());
+			localAuth.setLastEditTime(new Date());
+			localAuth.setPassword(MD5.getMd5(localAuth.getPassword()));
+			if (localAuth.getPersonInfo() != null
+					&& localAuth.getPersonInfo().getUserId() == null) {
+				if (profileImg != null) {
+					localAuth.getPersonInfo().setCreateTime(new Date());
+					localAuth.getPersonInfo().setLastEditTime(new Date());
+					localAuth.getPersonInfo().setEnableStatus(1);
+					try {
+						addProfileImg(localAuth, profileImg);
+					} catch (Exception e) {
+						throw new RuntimeException("addUserProfileImg error: "
+								+ e.getMessage());
+					}
+				}
+				try {
+					PersonInfo personInfo = localAuth.getPersonInfo();
+					int effectedNum = personInfoDao
+							.insertPersonInfo(personInfo);
+					localAuth.setUserId(personInfo.getUserId());
+					if (effectedNum <= 0) {
+						throw new RuntimeException("添加用户信息失败");
+					}
+				} catch (Exception e) {
+					throw new RuntimeException("insertPersonInfo error: "
+							+ e.getMessage());
+				}
+			}
+			int effectedNum = localAuthDao.insertLocalAuth(localAuth);
+			if (effectedNum <= 0) {
+				throw new RuntimeException("帐号创建失败");
+			} else {
+				return new LocalAuthExecution(LocalAuthStateEnum.SUCCESS,
+						localAuth);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("insertLocalAuth error: "
+					+ e.getMessage());
+		}
 	}
 
 	@Override
@@ -142,11 +141,11 @@ public class LocalAuthServiceImpl implements LocalAuthService {
 		}
 	}
 
-//	private void addProfileImg(LocalAuth localAuth,
-//			CommonsMultipartFile profileImg) {
-//		String dest = FileUtil.getPersonInfoImagePath();
-//		String profileImgAddr = ImageUtil.generateThumbnail(profileImg, dest);
-//		localAuth.getPersonInfo().setProfileImg(profileImgAddr);
-//	}
+	private void addProfileImg(LocalAuth localAuth,
+			CommonsMultipartFile profileImg) {
+		String dest = FileUtil.getPersonInfoImagePath();
+		String profileImgAddr = ImageUtil.generateThumbnail(profileImg, dest);
+		localAuth.getPersonInfo().setProfileImg(profileImgAddr);
+	}
 
 }

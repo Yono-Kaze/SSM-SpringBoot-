@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,8 @@ import com.imooc.myo2o.util.MD5;
 public class OwnerAuthController {
 	@Autowired
 	private LocalAuthService localAuthService;
+	
+	Logger logger = LoggerFactory.getLogger(OwnerAuthController.class);
 
 	@RequestMapping(value = "/ownerlogincheck", method = RequestMethod.POST)
 	@ResponseBody
@@ -111,6 +115,7 @@ public class OwnerAuthController {
 				if (user != null && localAuth.getPersonInfo() != null) {
 					localAuth.getPersonInfo().setUserId(user.getUserId());
 				}
+				localAuth.getPersonInfo().setCustomerFlag(1);
 				localAuth.getPersonInfo().setShopOwnerFlag(1);
 				localAuth.getPersonInfo().setAdminFlag(0);
 				LocalAuthExecution le = localAuthService.register(localAuth,
@@ -122,6 +127,7 @@ public class OwnerAuthController {
 					modelMap.put("errMsg", le.getStateInfo());
 				}
 			} catch (RuntimeException e) {
+				logger.debug(e.getMessage());
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.toString());
 				return modelMap;
