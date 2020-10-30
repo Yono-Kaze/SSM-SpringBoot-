@@ -1,6 +1,5 @@
 $(function() {
 	var shopAuthId = getQueryString('shopAuthId');
-	shopAuthId = 1;
 	var infoUrl = '/myo2o/shop/getshopauthmapbyid?shopAuthId=' + shopAuthId;
 
 	var shopAuthPostUrl = '/myo2o/shop/modifyshopauthmap';

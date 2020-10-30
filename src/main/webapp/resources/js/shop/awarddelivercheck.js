@@ -14,7 +14,7 @@ $(function() {
 							+ '<div class="col-33">' + item.awardName
 							+ '</div>'
 							+ '<div class="col-33 awarddeliver-time">'
-							+ new Date(item.createTime).Format("yyyy-MM-dd HH:mm:ss")
+							+ new Date(item.createTime).Format("yyyy-MM-dd")
 							+ '</div>' + '<div class="col-33">' + item.userName
 							+ '</div>' + '</div>';
 				});

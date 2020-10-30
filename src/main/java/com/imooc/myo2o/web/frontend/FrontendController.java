@@ -1,5 +1,7 @@
 package com.imooc.myo2o.web.frontend;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,5 +57,15 @@ public class FrontendController {
 	@RequestMapping(value = "/customerbind", method = RequestMethod.GET)
 	private String customerBind() {
 		return "frontend/customerbind";
+	}
+	
+	@RequestMapping(value = "/ownerlogin")
+	public String ownerLogin(HttpServletRequest request) {
+		return "frontend/ownerlogin";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	private String register() {
+		return "frontend/register";
 	}
 }

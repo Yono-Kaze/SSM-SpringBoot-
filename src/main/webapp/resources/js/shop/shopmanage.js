@@ -12,6 +12,8 @@ $(function(){
 			.attr('href','/myo2o/shop/shopedit?shopId=' + shopId);
 			$('#productcategorymanage')
 			.attr('href','/myo2o/shop/productcategorymanage?shopId=' + shopId);
+			$('#shopauthmanage')
+			.attr('href','/myo2o/shop/shopauthmanage?shopId=' + shopId);
 		}
 	});
 });

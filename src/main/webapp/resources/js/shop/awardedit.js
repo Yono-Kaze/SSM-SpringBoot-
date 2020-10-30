@@ -1,6 +1,6 @@
 $(function() {
 	var awardId = getQueryString('awardId');
-	var shopId = 1;
+	var shopId = getQueryString('shopId');
 	var infoUrl = '/myo2o/shop/getawardbyid?awardId=' + awardId;
 	var awardPostUrl = '/myo2o/shop/modifyaward';
 	var isEdit = false;

@@ -51,18 +51,20 @@ public class ShopManagementController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		PersonInfo user = (PersonInfo) request.getSession()
 				.getAttribute("user");
-		//		if (hasAccountBind(request, employeeId)) { modelMap.put("hasAccountBind",
-		//				true); } else { modelMap.put("hasAccountBind", false); }
+		//if (hasAccountBind(request, employeeId)) { modelMap.put("hasAccountBind",
+		//		true); } else { modelMap.put("hasAccountBind", false); }
 		try {
+			List<Shop> list = new ArrayList<Shop>();
 			Shop shopCondition = new Shop();
 			shopCondition.setOwner(user);
 			ShopExecution se = shopService
 					.getShopList(shopCondition, 0, 100);
+			list = se.getShopList();
 			modelMap.put("shopList", se.getShopList());
 			modelMap.put("user", user);
 			modelMap.put("success", true);
 			// 列出店铺成功之后，将店铺放入session中作为权限验证依据，即该帐号只能操作它自己的店铺
-			//			request.getSession().setAttribute("shopList", list);
+			request.getSession().setAttribute("shopList", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			modelMap.put("success", false);
@@ -71,7 +73,6 @@ public class ShopManagementController {
 		return modelMap;
 	}
 
-	//getshopMananInfo
 	@RequestMapping(value = "/getshopmanagementinfo", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String,Object> getShopManagementInfo(HttpServletRequest request){
@@ -191,7 +192,7 @@ public class ShopManagementController {
 					// 若shop创建成功，则加入session中，作为权限使用
 					@SuppressWarnings("unchecked")
 					List<Shop> shopList = (List<Shop>) request.getSession()
-							.getAttribute("shopList");
+					.getAttribute("shopList");
 					if (shopList != null && shopList.size() > 0) {
 						shopList.add(se.getShop());
 						request.getSession().setAttribute("shopList", shopList);
@@ -256,7 +257,7 @@ public class ShopManagementController {
 			shop.setOwner(owner);
 			ShopExecution se;
 			try {
-					se = shopService.modifyShop(shop, shopImg);
+				se = shopService.modifyShop(shop, shopImg);
 				if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
 					//该用户可以操作的店铺列表

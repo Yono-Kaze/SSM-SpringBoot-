@@ -22,7 +22,6 @@ import com.imooc.myo2o.enums.AwardStateEnum;
 import com.imooc.myo2o.service.AwardService;
 import com.imooc.myo2o.util.CodeUtil;
 import com.imooc.myo2o.util.HttpServletRequestUtil;
-import com.imooc.myo2o.util.TestUtil;
 
 @Controller
 @RequestMapping("/shop")
@@ -72,11 +71,6 @@ public class AwardManagementController {
 		return modelMap;
 	}
 
-	/**
-	 * 添加奖品
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping(value = "/addaward", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> addAward(HttpServletRequest request) {
