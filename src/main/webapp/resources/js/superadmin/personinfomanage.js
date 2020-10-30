@@ -245,7 +245,7 @@ function personinfoManagementEdit() {
 }
 function imgFormater(value, row, index) {
 	var profileImg = row.profileImg;
-	return '<img src="' + profileImg + '" width="100px" height="60px">';
+	return '<img src="' +getContextPath()+ profileImg + '" width="100px" height="60px">';
 }
 /**
  * 修改状态的Ajax

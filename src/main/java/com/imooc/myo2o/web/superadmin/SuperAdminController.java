@@ -13,6 +13,11 @@ public class SuperAdminController {
 	private String register() {
 		return "shop/bbb";
 	}
+	
+	@RequestMapping(value = "/shopmanage", method = RequestMethod.GET)
+	private String shopManage() {
+		return "superadmin/shopmanage";
+	}
 
 	@RequestMapping(value = "/areamanage", method = RequestMethod.GET)
 	private String areaManagement() {
