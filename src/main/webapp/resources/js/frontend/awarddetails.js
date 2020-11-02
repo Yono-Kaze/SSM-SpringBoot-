@@ -1,9 +1,13 @@
 $(function() {
-	var loading = true;
+	var loading = false;
 	var maxItems = 999;
 	var pageSize = 10;
 	var listUrl = '/myo2o/frontend/listawardsbyshop';
 	var pageNum = 1;
+	var parentId = getQueryString('parentId');
+	var areaId = '';
+	var shopCategoryId = '';
+	var shopName = '';
 
 	function addItems(pageSize, pageIndex) {
 		// 生成新条目的HTML
