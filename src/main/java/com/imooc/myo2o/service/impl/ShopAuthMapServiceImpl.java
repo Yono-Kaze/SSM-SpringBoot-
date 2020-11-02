@@ -90,8 +90,12 @@ public class ShopAuthMapServiceImpl implements ShopAuthMapService {
 	@Override
 	public ShopAuthMapExecution removeShopAuthMap(Long shopAuthMapId)
 			throws RuntimeException {
-		// TODO Auto-generated method stub
-		return null;
+		int row = shopAuthMapDao.deleteShopAuthMap(shopAuthMapId);
+		if(row < 0){
+			return new ShopAuthMapExecution(ShopAuthMapStateEnum.INNER_ERROR);
+		}else {
+			return new ShopAuthMapExecution(ShopAuthMapStateEnum.SUCCESS);
+		}
 	}
 
 	@Override

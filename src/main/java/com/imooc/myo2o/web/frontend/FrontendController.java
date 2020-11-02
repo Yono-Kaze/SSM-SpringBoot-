@@ -6,6 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * 
+ *<p>前端页面跳转路由<p>	
+ * @author Administrator
+ * @version 2020-11-2
+ *
+ */
 @Controller
 @RequestMapping("/frontend")
 public class FrontendController {

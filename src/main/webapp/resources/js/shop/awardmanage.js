@@ -91,7 +91,7 @@ $(function() {
 							deleteItem(e.currentTarget.dataset.id,
 									e.currentTarget.dataset.status);
 						} else if (target.hasClass('preview')) {
-							window.location.href = '/myo2o/shop/awardedit?awardId='
+							window.location.href = '/myo2o/frontend/awarddetail?awardId='
 									+ e.currentTarget.dataset.id;
 						}
 					});

@@ -1,14 +1,12 @@
 $(function() {
 	var shopAuthId = getQueryString('shopAuthId');
 	var infoUrl = '/myo2o/shop/getshopauthmapbyid?shopAuthId=' + shopAuthId;
-
 	var shopAuthPostUrl = '/myo2o/shop/modifyshopauthmap';
-
-	if (shopAuthId) {
+	var newEdit = getQueryString('newEdit');
+	if (!newEdit) {
 		getInfo(shopAuthId);
 	} else {
-		$.toast('用户不存在！');
-		window.location.href = '/myo2o/shop/shopmanage';
+		shopAuthPostUrl = '/myo2o/shop/addshopauthmap';
 	}
 
 	function getInfo(id) {

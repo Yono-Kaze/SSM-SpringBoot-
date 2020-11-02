@@ -28,6 +28,11 @@ public class ShopAuthManagementController {
 	@Autowired
 	private ShopAuthMapService shopAuthMapService;
 
+	/**
+	 * 查询该店铺下的所有雇员
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/listshopauthmapsbyshop", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> listShopAuthMapsByShop(
@@ -68,6 +73,12 @@ public class ShopAuthManagementController {
 		return modelMap;
 	}
 
+	/**
+	 * 雇员人员添加
+	 * @param shopAuthMapStr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/addshopauthmap", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> addShopAuthMap(String shopAuthMapStr,
@@ -88,11 +99,6 @@ public class ShopAuthManagementController {
 						"currentShop");
 				PersonInfo user = (PersonInfo) request.getSession()
 						.getAttribute("user");
-				if (currentShop.getOwnerId() != user.getUserId()) {
-					modelMap.put("success", false);
-					modelMap.put("errMsg", "无操作权限");
-					return modelMap;
-				}
 				shopAuthMap.setShopId(currentShop.getShopId());
 				shopAuthMap.setEmployeeId(user.getUserId());
 				ShopAuthMapExecution se = shopAuthMapService
@@ -116,6 +122,12 @@ public class ShopAuthManagementController {
 		return modelMap;
 	}
 
+	/**
+	 * 更新雇员信息
+	 * @param shopAuthMapStr
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/modifyshopauthmap", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> modifyShopAuthMap(String shopAuthMapStr,
@@ -164,7 +176,8 @@ public class ShopAuthManagementController {
 		return modelMap;
 	}
 
-	@RequestMapping(value = "/removeshopauthmap", method = RequestMethod.GET)
+	//删除雇员信息
+	@RequestMapping(value = "/removeshopauthmap", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> removeShopAuthMap(Long shopAuthId) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();

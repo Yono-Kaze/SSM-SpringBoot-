@@ -58,6 +58,6 @@ $(function() {
     });
 
   $('#new').click(function () {
-         window.location.href = '/myo2o/shop/shopauthedit';
+         window.location.href = '/myo2o/shop/shopauthedit?newEdit=true';
      });
 });

@@ -29,6 +29,11 @@ public class AwardManagementController {
 	@Autowired
 	private AwardService awardService;
 
+	/**
+	 * 查询该店铺下的所有奖品
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/listawardsbyshop", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> listAwardsByShop(HttpServletRequest request) {
@@ -55,6 +60,11 @@ public class AwardManagementController {
 		return modelMap;
 	}
 
+	/**
+	 * 通过ID查找奖品
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/getawardbyid", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> getAwardbyId(HttpServletRequest request) {
@@ -71,6 +81,11 @@ public class AwardManagementController {
 		return modelMap;
 	}
 
+	/**
+	 * 添加奖品
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/addaward", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> addAward(HttpServletRequest request) {
@@ -128,6 +143,11 @@ public class AwardManagementController {
 		return modelMap;
 	}
 
+	/**
+	 * 更新奖品
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/modifyaward", method = RequestMethod.POST)
 	@ResponseBody
 	private Map<String, Object> modifyAward(HttpServletRequest request) {

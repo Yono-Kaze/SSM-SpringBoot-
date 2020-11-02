@@ -50,8 +50,7 @@ public interface ShopAuthMapDao {
 	 * @param shopId
 	 * @return effectedNum
 	 */
-	int deleteShopAuthMap(@Param("employeeId") long employeeId,
-			@Param("shopId") long shopId);
+	int deleteShopAuthMap(@Param("shopAuthId") long shopAuthId);
 
 	/**
 	 * 

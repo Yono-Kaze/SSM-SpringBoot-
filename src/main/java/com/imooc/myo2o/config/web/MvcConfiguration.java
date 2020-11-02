@@ -140,47 +140,50 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 	 * 添加权限拦截器配置
 	 */
 	public void addInterceptors(InterceptorRegistry registry) {
-		String interceptPath = "/shop/**";
-		String interceptSuperAdminPath = "/superadmin/**";
-		//注册登录的拦截器
-		InterceptorRegistration loginIR = registry.addInterceptor(new ShopLoginInterceptor());
-		//		//配置拦截的路径
-		loginIR.addPathPatterns(interceptPath);
-		//		//配置不拦截的路径
-		loginIR.excludePathPatterns("/shop/ownerlogin");
-		loginIR.excludePathPatterns("/shop/register");
-		loginIR.excludePathPatterns("/shop/ownerlogincheck");
-		loginIR.excludePathPatterns("/shop/logout");
-		loginIR.excludePathPatterns("/shop/shopedit");
-		loginIR.excludePathPatterns("/shop/getshopinitinfo" );
-		loginIR.excludePathPatterns("/shop/registershop");
-		loginIR.excludePathPatterns("/shop/shopmanage");
-		loginIR.excludePathPatterns("/shop/getshopmanagementinfo");
-		loginIR.excludePathPatterns("/shop/getshopauthmapbyid");
-		//对该店铺有操作权限的拦截器
-		InterceptorRegistration permissionIR = registry.addInterceptor(new ShopPermissionInterceptor());
-		//配置拦截的路径
-		permissionIR.addPathPatterns(interceptPath);
-		//配置不拦截的路径
-		permissionIR.excludePathPatterns("/shop/ownerlogin");
-		permissionIR.excludePathPatterns("/shop/ownerlogincheck");
-		permissionIR.excludePathPatterns("/shop/register");
-		permissionIR.excludePathPatterns("/shop/shoplist");
-		permissionIR.excludePathPatterns("/shop/logout");
-		permissionIR.excludePathPatterns("/shop/list");
-		permissionIR.excludePathPatterns("/shop/shopedit");
-		permissionIR.excludePathPatterns("/shop/shopmanage");
-		permissionIR.excludePathPatterns("/shop/getshopmanagementinfo");
-		permissionIR.excludePathPatterns("/shop/getshopinitinfo" );
-		permissionIR.excludePathPatterns("/shop/registershop");
-		permissionIR.excludePathPatterns("/shop/getshopauthmapbyid");
-
-		//Superadmin权限验证拦截器
-		InterceptorRegistration SupperAdminIR = registry.addInterceptor(new SuperAdminLoginInterceptor());
-		//配置拦截的路径
-		SupperAdminIR.addPathPatterns(interceptSuperAdminPath);
-		//配置不拦截的路径
-		SupperAdminIR.excludePathPatterns("/superadmin/login");
-		SupperAdminIR.excludePathPatterns("/superadmin/logincheck");
+//		String interceptPath = "/shop/**";
+//		String interceptSuperAdminPath = "/superadmin/**";
+//		//注册登录的拦截器
+//		InterceptorRegistration loginIR = registry.addInterceptor(new ShopLoginInterceptor());
+//		//配置拦截的路径
+//		loginIR.addPathPatterns(interceptPath);
+//		//配置不拦截的路径
+//		loginIR.excludePathPatterns("/shop/ownerlogin");
+//		loginIR.excludePathPatterns("/shop/register");
+//		loginIR.excludePathPatterns("/shop/ownerlogincheck");
+//		loginIR.excludePathPatterns("/shop/logout");
+//		loginIR.excludePathPatterns("/shop/shopedit");
+//		loginIR.excludePathPatterns("/shop/getshopinitinfo" );
+//		loginIR.excludePathPatterns("/shop/registershop");
+//		loginIR.excludePathPatterns("/shop/shopmanage");
+//		loginIR.excludePathPatterns("/shop/getshopmanagementinfo");
+//		loginIR.excludePathPatterns("/shop/getshopauthmapbyid");
+//		
+//		//对该店铺有操作权限的拦截器
+//		InterceptorRegistration permissionIR = registry.addInterceptor(new ShopPermissionInterceptor());
+//		//配置拦截的路径
+//		permissionIR.addPathPatterns(interceptPath);
+//		//配置不拦截的路径
+//		permissionIR.excludePathPatterns("/shop/ownerlogin");
+//		permissionIR.excludePathPatterns("/shop/ownerlogincheck");
+//		permissionIR.excludePathPatterns("/shop/register");
+//		permissionIR.excludePathPatterns("/shop/shoplist");
+//		permissionIR.excludePathPatterns("/shop/changepsw");
+//		permissionIR.excludePathPatterns("/shop/changelocalpwd");
+//		permissionIR.excludePathPatterns("/shop/logout");
+//		permissionIR.excludePathPatterns("/shop/list");
+//		permissionIR.excludePathPatterns("/shop/shopedit");
+//		permissionIR.excludePathPatterns("/shop/shopmanage");
+//		permissionIR.excludePathPatterns("/shop/getshopmanagementinfo");
+//		permissionIR.excludePathPatterns("/shop/getshopinitinfo" );
+//		permissionIR.excludePathPatterns("/shop/registershop");
+//		permissionIR.excludePathPatterns("/shop/getshopauthmapbyid");
+//
+//		//Superadmin权限验证拦截器
+//		InterceptorRegistration SupperAdminIR = registry.addInterceptor(new SuperAdminLoginInterceptor());
+//		//配置拦截的路径
+//		SupperAdminIR.addPathPatterns(interceptSuperAdminPath);
+//		//配置不拦截的路径
+//		SupperAdminIR.excludePathPatterns("/superadmin/login");
+//		SupperAdminIR.excludePathPatterns("/superadmin/logincheck");
 	}
 }
