@@ -151,6 +151,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		loginIR.excludePathPatterns("/shop/ownerlogincheck");
 		loginIR.excludePathPatterns("/shop/register");
 		loginIR.excludePathPatterns("/shop/logout");
+		loginIR.excludePathPatterns("/shop/ownerregister");
 		
 		//对该店铺有操作权限的拦截器
 		InterceptorRegistration permissionIR = registry.addInterceptor(new ShopPermissionInterceptor());
@@ -162,6 +163,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		permissionIR.excludePathPatterns("/shop/ownerlogincheck");
 		permissionIR.excludePathPatterns("/shop/register");
 		permissionIR.excludePathPatterns("/shop/logout");
+		permissionIR.excludePathPatterns("/shop/ownerregister");
 		permissionIR.excludePathPatterns("/shop/registershop");
 		permissionIR.excludePathPatterns("/shop/list");
 		permissionIR.excludePathPatterns("/shop/shopmanage");
