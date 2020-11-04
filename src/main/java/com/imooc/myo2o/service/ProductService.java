@@ -9,6 +9,13 @@ import com.imooc.myo2o.dto.ProductExecution;
 import com.imooc.myo2o.entity.Product;
 import com.imooc.myo2o.exception.ProductOperationExecution;
 
+/**
+ * 
+ *<p>Description:ProductService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface ProductService {
 	/**
 	 * 商品列表的分页查询,商品名为模糊查询

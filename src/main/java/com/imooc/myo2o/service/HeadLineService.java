@@ -8,6 +8,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.imooc.myo2o.dto.HeadLineExecution;
 import com.imooc.myo2o.entity.HeadLine;
 
+/**
+ * 
+ *<p>Description:HeadLineService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface HeadLineService {
 	
 	public static final String HLLISTKEY = "headlinelist";
@@ -22,7 +29,7 @@ public interface HeadLineService {
 			throws IOException;
 
 	/**
-	 * 
+	 * 根据传入条件插入头条
 	 * @param headLine
 	 * @param thumbnail
 	 * @return
@@ -31,7 +38,7 @@ public interface HeadLineService {
 			CommonsMultipartFile thumbnail);
 
 	/**
-	 * 
+	 * 根据传入条件更新头条
 	 * @param headLine
 	 * @param thumbnail
 	 * @param thumbnailChange
@@ -41,14 +48,14 @@ public interface HeadLineService {
 			CommonsMultipartFile thumbnail);
 
 	/**
-	 * 
+	 * 根据传入条件删除头条
 	 * @param headLineId
 	 * @return
 	 */
 	HeadLineExecution removeHeadLine(long headLineId);
 
 	/**
-	 * 
+	 * 根据传入条件批量删除头条
 	 * @param headLineIdList
 	 * @return
 	 */

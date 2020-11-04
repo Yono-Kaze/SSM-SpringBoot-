@@ -57,74 +57,71 @@ public class HeadLineServiceImpl implements HeadLineService {
 	@Transactional
 	public HeadLineExecution addHeadLine(HeadLine headLine,
 			CommonsMultipartFile thumbnail) {
-			return null;
-//		if (headLine != null) {
-//			headLine.setCreateTime(new Date());
-//			headLine.setLastEditTime(new Date());
-//			if (thumbnail != null) {
-//				addThumbnail(headLine, thumbnail);
-//			}
-//			try {
-//				int effectedNum = headLineDao.insertHeadLine(headLine);
-//				if (effectedNum > 0) {
-//					String prefix = HLLISTKEY;
-//					Set<String> keySet = jedisKeys.keys(prefix + "*");
-//					for (String key : keySet) {
-//						jedisKeys.del(key);
-//					}
-//					return new HeadLineExecution(HeadLineStateEnum.SUCCESS,
-//							headLine);
-//				} else {
-//					return new HeadLineExecution(HeadLineStateEnum.INNER_ERROR);
-//				}
-//			} catch (Exception e) {
-//				throw new RuntimeException("添加区域信息失败:" + e.toString());
-//			}
-//		} else {
-//			return new HeadLineExecution(HeadLineStateEnum.EMPTY);
-//		}
+		if (headLine != null) {
+			headLine.setCreateTime(new Date());
+			headLine.setLastEditTime(new Date());
+			if (thumbnail != null) {
+				addThumbnail(headLine, thumbnail);
+			}
+			try {
+				int effectedNum = headLineDao.insertHeadLine(headLine);
+				if (effectedNum > 0) {
+					String prefix = HLLISTKEY;
+					Set<String> keySet = jedisKeys.keys(prefix + "*");
+					for (String key : keySet) {
+						jedisKeys.del(key);
+					}
+					return new HeadLineExecution(HeadLineStateEnum.SUCCESS,
+							headLine);
+				} else {
+					return new HeadLineExecution(HeadLineStateEnum.INNER_ERROR);
+				}
+			} catch (Exception e) {
+				throw new RuntimeException("添加区域信息失败:" + e.toString());
+			}
+		} else {
+			return new HeadLineExecution(HeadLineStateEnum.EMPTY);
+		}
 	}
 
 	@Override
 	@Transactional
 	public HeadLineExecution modifyHeadLine(HeadLine headLine,
 			CommonsMultipartFile thumbnail) {
-	return null;
-//		if (headLine.getLineId() != null && headLine.getLineId() > 0) {
-//			headLine.setLastEditTime(new Date());
-//			if (thumbnail != null) {
-//				HeadLine tempHeadLine = headLineDao.queryHeadLineById(headLine
-//						.getLineId());
-//				if (tempHeadLine.getLineImg() != null) {
-//					FileUtil.deleteFile(tempHeadLine.getLineImg());
-//				}
-//				addThumbnail(headLine, thumbnail);
-//			}
-//			try {
-//				int effectedNum = headLineDao.updateHeadLine(headLine);
-//				if (effectedNum > 0) {
-//					String prefix = HLLISTKEY;
-//					Set<String> keySet = jedisKeys.keys(prefix + "*");
-//					for (String key : keySet) {
-//						jedisKeys.del(key);
-//					}
-//					return new HeadLineExecution(HeadLineStateEnum.SUCCESS,
-//							headLine);
-//				} else {
-//					return new HeadLineExecution(HeadLineStateEnum.INNER_ERROR);
-//				}
-//			} catch (Exception e) {
-//				throw new RuntimeException("更新头条信息失败:" + e.toString());
-//			}
-//		} else {
-//			return new HeadLineExecution(HeadLineStateEnum.EMPTY);
-//		}
+		if (headLine.getLineId() != null && headLine.getLineId() > 0) {
+			headLine.setLastEditTime(new Date());
+			if (thumbnail != null) {
+				HeadLine tempHeadLine = headLineDao.queryHeadLineById(headLine
+						.getLineId());
+				if (tempHeadLine.getLineImg() != null) {
+					FileUtil.deleteFile(tempHeadLine.getLineImg());
+				}
+				addThumbnail(headLine, thumbnail);
+			}
+			try {
+				int effectedNum = headLineDao.updateHeadLine(headLine);
+				if (effectedNum > 0) {
+					String prefix = HLLISTKEY;
+					Set<String> keySet = jedisKeys.keys(prefix + "*");
+					for (String key : keySet) {
+						jedisKeys.del(key);
+					}
+					return new HeadLineExecution(HeadLineStateEnum.SUCCESS,
+							headLine);
+				} else {
+					return new HeadLineExecution(HeadLineStateEnum.INNER_ERROR);
+				}
+			} catch (Exception e) {
+				throw new RuntimeException("更新头条信息失败:" + e.toString());
+			}
+		} else {
+			return new HeadLineExecution(HeadLineStateEnum.EMPTY);
+		}
 	}
 
 	@Override
 	@Transactional
 	public HeadLineExecution removeHeadLine(long headLineId) {
-	//	return null;
 		if (headLineId > 0) {
 			try {
 				HeadLine tempHeadLine = headLineDao
@@ -183,10 +180,10 @@ public class HeadLineServiceImpl implements HeadLineService {
 		}
 	}
 
-//	private void addThumbnail(HeadLine headLine, CommonsMultipartFile thumbnail) {
-//		String dest = FileUtil.getHeadLineImagePath();
-//		String thumbnailAddr = ImageUtil.generateNormalImg(thumbnail, dest);
-//		headLine.setLineImg(thumbnailAddr);
-//	}
+	private void addThumbnail(HeadLine headLine, CommonsMultipartFile thumbnail) {
+		String dest = FileUtil.getHeadLineImagePath();
+		String thumbnailAddr = ImageUtil.generateNormalImg(thumbnail, dest);
+		headLine.setLineImg(thumbnailAddr);
+	}
 
 }

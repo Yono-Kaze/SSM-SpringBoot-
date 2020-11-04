@@ -8,12 +8,19 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.imooc.myo2o.dto.AreaExecution;
 import com.imooc.myo2o.entity.Area;
 
+/**
+ * 
+ *<p>Description:AreaService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface AreaService {
 	
 	public static final String AREALISTKEY = "arealist";
 	
 	/**
-	 * 
+	 * 获取全部区域列表
 	 * @return
 	 * @throws JsonParseException
 	 * @throws JsonMappingException
@@ -23,28 +30,28 @@ public interface AreaService {
 			IOException;
 
 	/**
-	 * 
+	 * 添加区域
 	 * @param area
 	 * @return
 	 */
 	AreaExecution addArea(Area area);
 
 	/**
-	 * 
+	 * 更新区域信息
 	 * @param area
 	 * @return
 	 */
 	AreaExecution modifyArea(Area area);
 
 	/**
-	 * 
+	 * 删除区域
 	 * @param areaId
 	 * @return
 	 */
 	AreaExecution removeArea(long areaId);
 
 	/**
-	 * 
+	 * 批量删除区域
 	 * @param areaIdList
 	 * @return
 	 */

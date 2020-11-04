@@ -1,5 +1,11 @@
 package com.imooc.myo2o.entity;
-
+/**
+ * 
+ *<p>Description:SuperAdmin常量<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public class ConstantForSuperAdmin {
 	public static final String PAGE_SIZE = "rows";
 	public static final String PAGE_NO = "page";

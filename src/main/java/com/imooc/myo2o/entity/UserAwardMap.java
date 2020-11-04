@@ -2,6 +2,13 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+/**
+ * 
+ *<p>Description:用户奖品类<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public class UserAwardMap {
 
 	private Long userAwardId;

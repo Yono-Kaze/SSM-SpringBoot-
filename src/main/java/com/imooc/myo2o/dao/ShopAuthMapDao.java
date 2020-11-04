@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Param;
 
 import com.imooc.myo2o.entity.ShopAuthMap;
 
+/**
+ * 
+ *<p>Description:店铺人员管理Dao接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface ShopAuthMapDao {
 	/**
 	 * 分页列出店铺下面的授权信息

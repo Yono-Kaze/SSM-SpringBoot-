@@ -1,5 +1,12 @@
 package com.imooc.myo2o.service;
 
+/**
+ * 
+ *<p>Description:Redis的CacheService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface CacheService {
 	
 	/**

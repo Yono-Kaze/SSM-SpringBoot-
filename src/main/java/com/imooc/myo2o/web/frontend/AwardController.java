@@ -10,19 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.imooc.myo2o.dto.AwardExecution;
 import com.imooc.myo2o.entity.Award;
 import com.imooc.myo2o.entity.Shop;
-import com.imooc.myo2o.enums.AwardStateEnum;
 import com.imooc.myo2o.service.AwardService;
-import com.imooc.myo2o.util.CodeUtil;
 import com.imooc.myo2o.util.HttpServletRequestUtil;
-import com.imooc.myo2o.util.TestUtil;
 
 /**
  * 

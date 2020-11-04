@@ -2,6 +2,13 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+/**
+ * 
+ *<p>Description:区域类<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public class Area {
 	private Long areaId;
 	private String areaName;

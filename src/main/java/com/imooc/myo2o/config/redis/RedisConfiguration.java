@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.imooc.myo2o.cache.JedisPoolWriper;
 import com.imooc.myo2o.cache.JedisUtil;
-
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
