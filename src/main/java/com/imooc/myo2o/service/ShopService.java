@@ -1,6 +1,5 @@
 package com.imooc.myo2o.service;
 
-import java.io.InputStream;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -9,6 +8,13 @@ import com.imooc.myo2o.dto.ShopExecution;
 import com.imooc.myo2o.entity.Shop;
 import com.imooc.myo2o.exception.ShopOperationException;
 
+/**
+ * 
+ *<p>Description:ShopService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface ShopService {
 	
 	/**

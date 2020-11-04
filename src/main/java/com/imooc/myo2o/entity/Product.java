@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 
+ *<p>Description:产品类<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public class Product implements Serializable{
 	
 	/**

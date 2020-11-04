@@ -3,9 +3,16 @@ package com.imooc.myo2o.service;
 import com.imooc.myo2o.dto.ShopAuthMapExecution;
 import com.imooc.myo2o.entity.ShopAuthMap;
 
+/**
+ * 
+ *<p>Description:ShopAuthMapService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface ShopAuthMapService {
 	/**
-	 * 
+	 * 返回授权信息列表
 	 * @param shopId
 	 * @param pageIndex
 	 * @param pageSize
@@ -15,7 +22,7 @@ public interface ShopAuthMapService {
 			Integer pageIndex, Integer pageSize);
 
 	/**
-	 * 
+	 * 添加授权信息
 	 * @param shopAuthMap
 	 * @return
 	 * @throws RuntimeException
@@ -36,7 +43,7 @@ public interface ShopAuthMapService {
 	ShopAuthMapExecution modifyShopAuthMap(ShopAuthMap shopAuthMap) throws RuntimeException;
 
 	/**
-	 * 
+	 * 删除授权信息
 	 * @param shopAuthMapId
 	 * @return
 	 * @throws RuntimeException
@@ -45,7 +52,7 @@ public interface ShopAuthMapService {
 			throws RuntimeException;
 
 	/**
-	 * 
+	 * 根据id返回授权信息
 	 * @param shopAuthId
 	 * @return
 	 */

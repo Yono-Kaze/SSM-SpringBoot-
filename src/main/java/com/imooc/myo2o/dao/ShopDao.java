@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Param;
 
 import com.imooc.myo2o.entity.Shop;
 
+/**
+ * 
+ *<p>Description:店铺Dao接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface ShopDao {
 
 	/**

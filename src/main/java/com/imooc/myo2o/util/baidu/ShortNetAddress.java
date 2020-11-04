@@ -39,7 +39,7 @@ public class ShortNetAddress {
 			// TODO Auto-generated catch block
 			log.error("getValueByKey_JSON error:" + e.toString());
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (@SuppressWarnings("hiding") IOException e) {
 			// TODO Auto-generated catch block
 			log.error("getValueByKey_JSON error:" + e.toString());
 		}

@@ -2,6 +2,13 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+/**
+ * 
+ *<p>Description:微信用户类<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public class WechatAuth {
 	private Long wechatAuthId;
 	private Long userId;

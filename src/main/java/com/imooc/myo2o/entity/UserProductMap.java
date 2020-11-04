@@ -2,6 +2,13 @@ package com.imooc.myo2o.entity;
 
 import java.util.Date;
 
+/**
+ * 
+ *<p>Description:用户消费记录类<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public class UserProductMap {
 	private Long userProductId;
 	private Long userId;

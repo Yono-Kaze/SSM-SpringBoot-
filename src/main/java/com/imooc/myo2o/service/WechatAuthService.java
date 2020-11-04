@@ -6,6 +6,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.imooc.myo2o.dto.WechatAuthExecution;
 import com.imooc.myo2o.entity.WechatAuth;
 
+/**
+ * 
+ *<p>Description:WechatAuthService接口<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface WechatAuthService {
 
 	/**

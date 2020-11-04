@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +19,6 @@ import com.imooc.myo2o.dao.AreaDao;
 import com.imooc.myo2o.dto.AreaExecution;
 import com.imooc.myo2o.entity.Area;
 import com.imooc.myo2o.enums.AreaStateEnum;
-import com.imooc.myo2o.exception.AreaOperationException;
 import com.imooc.myo2o.service.AreaService;
 
 @Service

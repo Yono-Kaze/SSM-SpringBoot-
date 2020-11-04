@@ -23,7 +23,6 @@ import com.imooc.myo2o.dao.ShopCategoryDao;
 import com.imooc.myo2o.dto.ShopCategoryExecution;
 import com.imooc.myo2o.entity.ShopCategory;
 import com.imooc.myo2o.enums.ShopCategoryStateEnum;
-import com.imooc.myo2o.exception.AreaOperationException;
 import com.imooc.myo2o.exception.ShopCategoryOperationException;
 import com.imooc.myo2o.service.ShopCategoryService;
 import com.imooc.myo2o.util.FileUtil;

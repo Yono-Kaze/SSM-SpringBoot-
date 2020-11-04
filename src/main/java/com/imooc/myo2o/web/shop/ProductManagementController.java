@@ -1,6 +1,5 @@
 package com.imooc.myo2o.web.shop;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

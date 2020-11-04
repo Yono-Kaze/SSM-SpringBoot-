@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Param;
 
 import com.imooc.myo2o.entity.ProductCategory;
 
+/**
+ * 
+ *<p>Description:产品分类接口Dao<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 public interface ProductCategoryDao {
 		
 	/**
