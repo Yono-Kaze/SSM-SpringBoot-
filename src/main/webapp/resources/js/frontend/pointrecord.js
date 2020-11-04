@@ -10,7 +10,7 @@ $(function() {
 
 	function addItems(pageSize, pageIndex) {
 		// 生成新条目的HTML
-		var url = listUrl + '?shopId=1&' + 'pageIndex=' + pageIndex
+		var url = listUrl + '?pageIndex=' + pageIndex
 				+ '&pageSize=' + pageSize + '&productName=' + productName;
 		loading = true;
 		$.getJSON(url, function(data) {

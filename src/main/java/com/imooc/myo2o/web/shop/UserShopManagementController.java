@@ -23,6 +23,11 @@ public class UserShopManagementController {
 	@Autowired
 	private UserShopMapService userShopMapService;
 
+	/**
+	 * 按商店id查看顾客积分
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/listusershopmapsbyshop", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> listUserShopMapsByShop(

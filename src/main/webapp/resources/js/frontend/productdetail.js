@@ -15,6 +15,7 @@ $(function() {
 											.Format("yyyy-MM-dd"));
 							$('#product-name').text(product.productName);
 							$('#product-desc').text(product.productDesc);
+							$('#product-point').text(product.point);
 							var imgListHtml = '';
 							product.productImgList.map(function(item, index) {
 								imgListHtml += '<div> <img src="'
@@ -30,4 +31,27 @@ $(function() {
 		$.openPanel('#panel-left-demo');
 	});
 	$.init();
+	
+	$('#buy').click(function() {
+		var buy =  '/myo2o/shop/adduserproductmap?productId=' + productId;
+				$.ajax({
+			url : buy,
+			type : 'GET',
+			//contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					$.toast('购买成功！');
+				} else {
+					$.toast('购买失败！');
+					$('#captcha_img').click();
+				}
+				$('#captcha_img').click();
+			}
+		});
+	});
 });
+
+

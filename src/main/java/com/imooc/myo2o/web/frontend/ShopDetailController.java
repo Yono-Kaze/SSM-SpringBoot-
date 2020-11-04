@@ -42,12 +42,13 @@ public class ShopDetailController {
 			HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		long shopId = HttpServletRequestUtil.getLong(request, "shopId");
-		Shop shop = null;
+		Shop currentShop = null;
 		List<ProductCategory> productCategoryList = null;
 		if (shopId != -1) {
-			shop = shopService.getByShopId(shopId);
+			currentShop = shopService.getByShopId(shopId);
 			productCategoryList = productCategoryService.getByShopId(shopId);
-			modelMap.put("shop", shop);
+			request.getSession().setAttribute("currentShop", currentShop);
+			modelMap.put("shop", currentShop);
 			modelMap.put("productCategoryList", productCategoryList);
 			modelMap.put("success", true);
 		} else {

@@ -40,6 +40,11 @@ public class UserProductManagementController {
 	@Autowired
 	private ShopAuthMapService shopAuthMapService;
 
+	/**
+	 * 查询产品购买信息
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/listuserproductmapsbyshop", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> listUserProductMapsByShop(
@@ -71,38 +76,24 @@ public class UserProductManagementController {
 		return modelMap;
 	}
 
+	/**
+	 * 添加商品购买信息
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/adduserproductmap", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> addUserProductMap(HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		PersonInfo user = (PersonInfo) request.getSession()
 				.getAttribute("user");
+		Product currentProduct = (Product) request.getSession()
+				.getAttribute("currentProduct");
 		String qrCodeinfo = HttpServletRequestUtil.getString(request, "state");
-		ObjectMapper mapper = new ObjectMapper();
-		WechatInfo wechatInfo = null;
-		try {
-			wechatInfo = mapper.readValue(qrCodeinfo, WechatInfo.class);
-		} catch (Exception e) {
-			modelMap.put("success", false);
-			modelMap.put("errMsg", e.toString());
-			return modelMap;
-		}
-		if (!checkQRCodeInfo(wechatInfo)) {
-			modelMap.put("success", false);
-			modelMap.put("errMsg", "二维码信息非法！");
-			return modelMap;
-		}
-		Long productId = wechatInfo.getProductId();
-		Long customerId = wechatInfo.getCustomerId();
-		UserProductMap userProductMap = compactUserProductMap4Add(customerId,
-				productId);
-		if (userProductMap != null && customerId != -1) {
+		UserProductMap userProductMap = compactUserProductMap4Add(user.getUserId(),
+				currentProduct.getProductId());
+		if (userProductMap != null && user.getUserId() != -1) {
 			try {
-				if (!checkShopAuth(user.getUserId(), userProductMap)) {
-					modelMap.put("success", false);
-					modelMap.put("errMsg", "无操作权限");
-					return modelMap;
-				}
 				UserProductMapExecution se = userProductMapService
 						.addUserProductMap(userProductMap);
 				if (se.getState() == UserProductMapStateEnum.SUCCESS.getState()) {
@@ -147,6 +138,7 @@ public class UserProductManagementController {
 			PersonInfo personInfo = personInfoService
 					.getPersonInfoById(customerId);
 			Product product = productService.getProductById(productId);
+			userProductMap.setUserId(customerId);
 			userProductMap.setProductId(productId);
 			userProductMap.setShopId(product.getShop().getShopId());
 			userProductMap.setProductName(product.getProductName());

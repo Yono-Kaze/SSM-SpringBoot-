@@ -43,6 +43,7 @@ public class ProductDetailController {
 		Product product = null;
 		if (productId != -1) {
 			product = productService.getProductById(productId);
+			request.getSession().setAttribute("currentProduct", product);
 			modelMap.put("product", product);
 			modelMap.put("success", true);
 		} else {

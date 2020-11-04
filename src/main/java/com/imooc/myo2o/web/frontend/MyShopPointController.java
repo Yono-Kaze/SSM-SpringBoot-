@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imooc.myo2o.dto.UserShopMapExecution;
+import com.imooc.myo2o.entity.PersonInfo;
 import com.imooc.myo2o.entity.UserShopMap;
 import com.imooc.myo2o.service.UserShopMapService;
 import com.imooc.myo2o.util.HttpServletRequestUtil;
@@ -28,10 +29,10 @@ public class MyShopPointController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex");
 		int pageSize = HttpServletRequestUtil.getInt(request, "pageSize");
-		Long userId = 1L;
-		if ((pageIndex > -1) && (pageSize > -1) && (userId != null)) {
+		PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
+		if ((pageIndex > -1) && (pageSize > -1) && (user.getUserId() != null)) {
 			UserShopMap userShopMapCondition = new UserShopMap();
-			userShopMapCondition.setUserId(userId);
+			userShopMapCondition.setUserId(user.getUserId());
 			long shopId = HttpServletRequestUtil.getLong(request, "shopId");
 			if (shopId > -1) {
 				userShopMapCondition.setShopId(shopId);

@@ -124,7 +124,7 @@
 		useGeneratedKeys="true" keyProperty="userShopId" keyColumn="user_shop_id">
 		INSERT
 		INTO
-		tb_user_product_map(user_id,shop_id,
+		tb_user_shop_map(user_id,shop_id,
 		user_name,shop_name,create_time,point)
 		VALUES
 		(#{userId},#{shopId},

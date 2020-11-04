@@ -14,6 +14,10 @@ $(function(){
 			.attr('href','/myo2o/shop/productcategorymanage?shopId=' + shopId);
 			$('#shopauthmanage')
 			.attr('href','/myo2o/shop/shopauthmanage?shopId=' + shopId);
+			$('#productbuycheck')
+			.attr('href','/myo2o/shop/productbuycheck?shopId=' + shopId);
+			$('#usershopcheck')
+			.attr('href','/myo2o/shop/usershopcheck?shopId=' + shopId);
 		}
 	});
 });

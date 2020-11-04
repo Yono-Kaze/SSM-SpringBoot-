@@ -5,13 +5,15 @@ $(function() {
 	var listUrl = '/myo2o/frontend/listawardsbyshop';
 	var pageNum = 1;
 	var parentId = getQueryString('parentId');
+	var enableStatus = getQueryString('enableStatus');
 	var areaId = '';
 	var shopCategoryId = '';
 	var shopName = '';
+	var addUserAwardMap = '/myo2o/frontend/adduserawardmap'
 
 	function addItems(pageSize, pageIndex) {
 		// 生成新条目的HTML
-		var url = listUrl + '?' + 'pageIndex=' + pageIndex + '&pageSize='
+		var url = listUrl + '?enableStatus='+ enableStatus + '&pageIndex=' + pageIndex + '&pageSize='
 				+ pageSize;
 		loading = true;
 		$.getJSON(url, function(data) {
@@ -64,8 +66,27 @@ $(function() {
 	});
 
 	$('.shop-list').on('click', '.card', function(e) {
-		var shopId = e.currentTarget.dataset.shopId;
-		alert("兑换奖品");
+		var awardId = e.currentTarget.dataset.awardId;
+		var formData = new FormData();
+		formData.append('awardId', awardId);
+				$.ajax({
+			url : addUserAwardMap,
+			type : 'POST',
+			data : formData,
+			//contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				if (data.success) {
+					$.toast('兑换成功！');
+				} else {
+					$.toast('兑换失败！');
+					$('#captcha_img').click();
+				}
+				$('#captcha_img').click();
+			}
+		});
 	});
 
 	$.init();

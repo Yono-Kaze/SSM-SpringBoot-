@@ -51,8 +51,6 @@ public class ShopManagementController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		PersonInfo user = (PersonInfo) request.getSession()
 				.getAttribute("user");
-		//if (hasAccountBind(request, employeeId)) { modelMap.put("hasAccountBind",
-		//		true); } else { modelMap.put("hasAccountBind", false); }
 		try {
 			List<Shop> list = new ArrayList<Shop>();
 			Shop shopCondition = new Shop();

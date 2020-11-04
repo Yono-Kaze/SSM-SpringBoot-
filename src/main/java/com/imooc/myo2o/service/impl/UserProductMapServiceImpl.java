@@ -3,6 +3,8 @@ package com.imooc.myo2o.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,8 @@ public class UserProductMapServiceImpl implements UserProductMapService {
 	private PersonInfoDao personInfoDao;
 	@Autowired
 	private ShopDao shopDao;
+	
+	Logger logger = LoggerFactory.getLogger(UserProductMapServiceImpl.class);
 
 	@Override
 	public UserProductMapExecution listUserProductMap(
@@ -99,6 +103,7 @@ public class UserProductMapServiceImpl implements UserProductMapService {
 				return new UserProductMapExecution(
 						UserProductMapStateEnum.SUCCESS, userProductMap);
 			} catch (Exception e) {
+				logger.debug(e.getMessage());
 				throw new RuntimeException("添加授权失败:" + e.toString());
 			}
 		} else {

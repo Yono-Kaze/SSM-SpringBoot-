@@ -39,7 +39,7 @@ public class AwardController {
 	private AwardService awardService;
 
 	/**
-	 * 查询该店铺下的所有奖品
+	 * 按照商店id店铺下的所有奖品
 	 * @param request
 	 * @return
 	 */
@@ -57,6 +57,10 @@ public class AwardController {
 					"awardName");
 			Award awardCondition = compactAwardCondition4Search(
 					currentShop.getShopId(), awardName);
+			int enableStatus = HttpServletRequestUtil.getInt(request, "enableStatus");
+			if(enableStatus != -1) {
+				awardCondition.setEnableStatus(1);
+			}
 			AwardExecution ae = awardService.getAwardList(awardCondition,
 					pageIndex, pageSize);
 			modelMap.put("awardList", ae.getAwardList());

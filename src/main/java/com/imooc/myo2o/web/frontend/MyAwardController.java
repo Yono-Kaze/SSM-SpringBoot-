@@ -28,6 +28,13 @@ import com.imooc.myo2o.util.HttpServletRequestUtil;
 import com.imooc.myo2o.util.QRCodeUtil;
 import com.imooc.myo2o.util.baidu.ShortNetAddress;
 
+/**
+ * 
+ *<p>Description:前端奖品的controller<p>	
+ * @author Administrator
+ * @version 2020-11-4
+ *
+ */
 @Controller
 @RequestMapping("/frontend")
 public class MyAwardController {
@@ -43,6 +50,11 @@ public class MyAwardController {
 			+ "response_type=code&scope=snsapi_userinfo&state=";
 	private static String URLSUFFIX = "#wechat_redirect";
 
+	/**
+	 * 根据用户id查询奖品记录
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/listuserawardmapsbycustomer", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> listUserAwardMapsByCustomer(
@@ -50,10 +62,11 @@ public class MyAwardController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex");
 		int pageSize = HttpServletRequestUtil.getInt(request, "pageSize");
-		Long userId = 1L;
-		if ((pageIndex > -1) && (pageSize > -1) && (userId != null)) {
+		PersonInfo user = (PersonInfo) request.getSession()
+				.getAttribute("user");
+		if ((pageIndex > -1) && (pageSize > -1) && (user != null)) {
 			UserAwardMap userAwardMapCondition = new UserAwardMap();
-			userAwardMapCondition.setUserId(userId);
+			userAwardMapCondition.setUserId(user.getUserId());
 			long shopId = HttpServletRequestUtil.getLong(request, "shopId");
 			if (shopId > -1) {
 				userAwardMapCondition.setShopId(shopId);
