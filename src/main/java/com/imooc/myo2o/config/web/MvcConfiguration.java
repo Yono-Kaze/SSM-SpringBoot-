@@ -166,6 +166,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		permissionIR.excludePathPatterns("/shop/ownerregister");
 		permissionIR.excludePathPatterns("/shop/registershop");
 		permissionIR.excludePathPatterns("/shop/list");
+		permissionIR.excludePathPatterns("/shop/shoplist");
 		permissionIR.excludePathPatterns("/shop/shopmanage");
 		permissionIR.excludePathPatterns("/shop/getshopmanagementinfo");
 		permissionIR.excludePathPatterns("/shop/getshopinitinfo" );
